@@ -1,0 +1,33 @@
+istio:
+  controlplane: basic
+  namespace: istio-system
+
+namespaces:
+  - dev01
+  - dev02
+  - dev03
+  - pre01
+  - pre02
+  - pre03
+  - pro01
+  - pro02
+  - pro03
+
+environments:
+  dev:
+    namespaces:
+      - dev01
+      - dev02
+  pre:
+    namespaces:
+      - pre01
+      - pre02
+  pro:
+    namespaces:
+      - pro01
+      - pro02
+  test:
+    namespaces:
+      - dev03
+      - pre03
+      - pro03

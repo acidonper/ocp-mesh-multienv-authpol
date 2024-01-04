@@ -1,0 +1,14 @@
+{{- range $key := $.Values.namespaces }}
+---
+apiVersion: maistra.io/v1
+kind: ServiceMeshMember
+metadata:
+  name: default
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
+  namespace: {{ $key }}
+spec:
+  controlPlaneRef:
+    name: {{ $.Values.istio.controlplane }}
+    namespace: {{ $.Values.istio.namespace }}
+{{- end }}

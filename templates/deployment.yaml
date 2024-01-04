@@ -1,0 +1,27 @@
+{{- range $key := $.Values.namespaces }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: support-tool-deployment
+  labels:
+    app: support-tool
+  namespace: {{ $key }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: support-tool
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: support-tool
+    spec:
+      containers:
+      - name: support-tool
+        image: ubi9/httpd-24
+        ports:
+        - containerPort: 8080
+{{- end }}
